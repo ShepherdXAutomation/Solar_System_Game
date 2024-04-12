@@ -244,12 +244,13 @@ var mouse = Mouse.create(render.canvas),
         }
     });
 
+   
     var sun_elastic = Constraint.create({
         pointA: { x: 50, y: 50 },
         bodyB: sun,
         density: 1,
-        stiffness: 1,
-        length: 50,
+        stiffness: 0.001,
+        length: 10,
         render: {
             visible: false,
             lineWidth: 5,

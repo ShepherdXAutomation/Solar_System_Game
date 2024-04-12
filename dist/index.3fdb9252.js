@@ -845,8 +845,8 @@ var sun_elastic = Constraint.create({
     },
     bodyB: sun,
     density: 1,
-    stiffness: 1,
-    length: 50,
+    stiffness: 0.001,
+    length: 10,
     render: {
         visible: false,
         lineWidth: 5,
