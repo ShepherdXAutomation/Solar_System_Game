@@ -607,6 +607,38 @@ var ball = Bodies.circle(260, 100, 40, {
     density: 0.04
 });
 //var ground = Bodies.rectangle(400, 610, 810, 60, { isStatic: true });
+// Function to create an asteroid
+function createAsteroid(x, y, radius) {
+    return Bodies.circle(x, y, radius, {
+        density: 0.001,
+        frictionAir: 0.001,
+        restitution: 0.8,
+        render: {
+            fillStyle: "#564d4d"
+        }
+    });
+}
+// Function to shoot an asteroid from point (x, y) towards target (targetX, targetY)
+function shootAsteroid(x, y, targetX, targetY) {
+    // Calculate angle between click and center point
+    const angle = Math.atan2(targetY - y, targetX - x);
+    // Calculate force vector
+    const forceMagnitude = 0.05; // Adjust as necessary
+    const forceX = Math.cos(angle) * forceMagnitude;
+    const forceY = Math.sin(angle) * forceMagnitude;
+    // Create an asteroid at the center and apply force
+    const asteroid = createAsteroid(x, y, 20); // Adjust radius as necessary
+    World.add(engine.world, [
+        asteroid
+    ]);
+    Body.applyForce(asteroid, {
+        x: asteroid.position.x,
+        y: asteroid.position.y
+    }, {
+        x: forceX,
+        y: forceY
+    });
+}
 // create a mouse controlled constraint
 var mouse = Mouse.create(render.canvas), mouseConstraint = MouseConstraint.create(engine, {
     mouse: mouse,
@@ -703,7 +735,7 @@ var earth_elastic = Constraint.create({
         strokeStyle: "#ffffff"
     }
 });
-var mars = Bodies.circle(490, 450, 7, {
+var mars = Bodies.circle(520, 450, 7, {
     density: 1,
     render: {
         fillStyle: "#A00A02"
@@ -715,8 +747,8 @@ var mars = Bodies.circle(490, 450, 7, {
 });
 var mars_elastic = Constraint.create({
     pointA: {
-        x: 490,
-        y: 450
+        x: 520,
+        y: 420
     },
     bodyB: mars,
     density: 1,
@@ -728,7 +760,7 @@ var mars_elastic = Constraint.create({
         strokeStyle: "#ffffff"
     }
 });
-var jupiter = Bodies.circle(550, 550, 70, {
+var jupiter = Bodies.circle(630, 480, 70, {
     density: 1,
     render: {
         fillStyle: "#D3611A"
@@ -740,8 +772,8 @@ var jupiter = Bodies.circle(550, 550, 70, {
 });
 var jupiter_elastic = Constraint.create({
     pointA: {
-        x: 550,
-        y: 550
+        x: 630,
+        y: 480
     },
     bodyB: jupiter,
     density: 1,
@@ -753,7 +785,7 @@ var jupiter_elastic = Constraint.create({
         strokeStyle: "#ffffff"
     }
 });
-var saturn = Bodies.circle(650, 700, 55, {
+var saturn = Bodies.circle(780, 510, 55, {
     density: 1,
     render: {
         fillStyle: "#A0984D"
@@ -765,8 +797,8 @@ var saturn = Bodies.circle(650, 700, 55, {
 });
 var saturn_elastic = Constraint.create({
     pointA: {
-        x: 650,
-        y: 700
+        x: 780,
+        y: 510
     },
     bodyB: saturn,
     density: 1,
@@ -778,7 +810,7 @@ var saturn_elastic = Constraint.create({
         strokeStyle: "#ffffff"
     }
 });
-var uranus = Bodies.circle(800, 750, 55, {
+var uranus = Bodies.circle(880, 450, 55, {
     density: 1,
     render: {
         fillStyle: "#2BD7CB"
@@ -790,8 +822,8 @@ var uranus = Bodies.circle(800, 750, 55, {
 });
 var uranus_elastic = Constraint.create({
     pointA: {
-        x: 800,
-        y: 750
+        x: 1000,
+        y: 450
     },
     bodyB: uranus,
     density: 1,
@@ -920,6 +952,13 @@ render.mouse = mouse;
 Engine.run(engine);
 // run the renderer
 Render.run(render);
+// Correct event binding for mouse click
+Events.on(engine, "mousedown", function(event) {
+    const mousePosition = event.mouse.position;
+    const x = render.options.width / 2;
+    const y = render.options.height;
+    shootAsteroid(x, y, mousePosition.x, mousePosition.y);
+});
 // Resize the render canvas on window resize
 window.addEventListener("resize", function() {
     render.canvas.width = window.innerWidth;
