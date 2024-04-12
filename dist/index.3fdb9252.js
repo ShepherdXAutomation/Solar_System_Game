@@ -810,7 +810,7 @@ var saturn_elastic = Constraint.create({
         strokeStyle: "#ffffff"
     }
 });
-var uranus = Bodies.circle(880, 450, 55, {
+var uranus = Bodies.circle(910, 450, 55, {
     density: 1,
     render: {
         fillStyle: "#2BD7CB"
@@ -822,7 +822,7 @@ var uranus = Bodies.circle(880, 450, 55, {
 });
 var uranus_elastic = Constraint.create({
     pointA: {
-        x: 1000,
+        x: 910,
         y: 450
     },
     bodyB: uranus,
@@ -835,7 +835,7 @@ var uranus_elastic = Constraint.create({
         strokeStyle: "#ffffff"
     }
 });
-var neptune = Bodies.circle(850, 850, 60, {
+var neptune = Bodies.circle(1100, 430, 60, {
     density: 1,
     render: {
         fillStyle: "blue"
@@ -845,20 +845,10 @@ var neptune = Bodies.circle(850, 850, 60, {
         mask: 0x0001 // Only collide with default category
     }
 });
-var pointBody = Bodies.circle(400, 400, 10, {
-    isStatic: true,
-    render: {
-        fillStyle: "red"
-    },
-    collisionFilter: {
-        category: 0x0004,
-        mask: 0x0000 // Collides with nothing
-    }
-});
 var neptune_elastic = Constraint.create({
     pointA: {
-        x: 850,
-        y: 850
+        x: 1100,
+        y: 430
     },
     bodyB: neptune,
     density: 1,
