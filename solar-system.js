@@ -275,6 +275,34 @@ Matter.Events.on(render, 'afterRender', function(event) {
     var context = render.context;
     context.fillStyle = '#fff';
     context.font = '16px Arial';
+    context.fillText('Mars', mars.position.x-20, mars.position.y- 10);
+
+    context.fillStyle = '#fff';
+    context.font = '16px Arial';
+    context.fillText('Mercury', mercury.position.x-20, mercury.position.y-10);
+
+    context.fillStyle = '#fff';
+    context.font = '16px Arial';
+    context.fillText('Venus', venus.position.x-20, venus.position.y-10);
+
+    context.fillStyle = '#fff';
+    context.font = '16px Arial';
+    context.fillText('Earth', earth.position.x-20, earth.position.y-10);
+
+    context.fillStyle = '#fff';
+    context.font = '16px Arial';
+    context.fillText('Jupiter', jupiter.position.x-30, jupiter.position.y);
+
+    context.fillStyle = '#fff';
+    context.font = '16px Arial';
+    context.fillText('Saturn', saturn.position.x-30, saturn.position.y);
+
+    context.fillStyle = '#fff';
+    context.font = '16px Arial';
+    context.fillText('Uranus', uranus.position.x-30, uranus.position.y);
+
+    context.fillStyle = '#fff';
+    context.font = '16px Arial';
     context.fillText('Neptune', neptune.position.x-30, neptune.position.y);
 
     context.fillStyle = 'black';
